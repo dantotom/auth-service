@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  auth:
+    image: ghcr.io/dantotom/auth-service:${TAG:-prod-latest}
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      JWT_PRIVATE_KEY_PATH: /run/keys/jwt_private_key.pem
+      JWT_PUBLIC_KEY_PATH: /run/keys/jwt_public_key.pem
+    volumes:
+      - ./keys:/run/keys:ro
+    ports:
+      - "8081:8080"

@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  auth:
+    build: .
+    container_name: scribbly_auth_service
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SECURITY_JWT_PRIVATE_KEY_PATH: /run/keys/jwt_private_key.pem
+      SECURITY_JWT_PUBLIC_KEY_PATH: /run/keys/jwt_public_key.pem
+
+    volumes:
+      - "../../devOps/keys:/run/keys:ro"
+    ports:
+      - "8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  auth_pg:

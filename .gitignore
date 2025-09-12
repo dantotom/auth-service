@@ -1,0 +1,26 @@
+# === Build & IDE ===
+target/
+build/
+out/
+*.class
+*.log
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.project
+*.classpath
+.settings/
+*.DS_Store
+
+# === Environment & Secrets ===
+.env.example
+.env.*
+.env
+!.env.example
+keys/
+deploy_fail_*.log
+
+# === OS / Misc ===
+Thumbs.db

@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dev_postgres
+    environment:
+      POSTGRES_DB: scribbly
+      POSTGRES_USER: scribbly_admin
+      POSTGRES_PASSWORD: scribbly_admin
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U scribbly -d scribbly_auth" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
