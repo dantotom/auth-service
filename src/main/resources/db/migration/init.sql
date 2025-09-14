@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at      TIMESTAMPTZ,
     updated_at      TIMESTAMPTZ,
     last_login_at   TIMESTAMPTZ,
-    role            VARCHAR(16)  NOT NULL DEFAULT 'USER',
+    user_role            VARCHAR(16)  NOT NULL DEFAULT 'USER',
     CONSTRAINT users_status_ck CHECK (status IN ('ACTIVE','INACTIVE')),
     CONSTRAINT users_role_ck   CHECK (role   IN ('USER','ADMIN'))
     );

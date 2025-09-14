@@ -37,6 +37,6 @@ public class User {
     private Instant updatedAt;
     private Instant lastLoginAt;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 16)
+    @Column(name = "user_role", nullable = false, length = 16)
     private UserRole role = UserRole.USER;
 }

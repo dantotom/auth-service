@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:authdb-${random.uuid};MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:test-schema.sql
+logging:
+  level:
+    org.hibernate.SQL: WARN
+    it.dtd.note: DEBUG
+    org.springframework.test: INFO
+    org.springframework.jdbc.datasource.init: DEBUG
+
+security:
+  jwt:
+    issuer: auth-service
+    access-token-ttl: 900
+    refresh-token-ttl: 604800
+    private-key-path: classpath:keys/jwt_private_key.pem
+    public-key-path: classpath:keys/jwt_public_key.pem
